@@ -24,13 +24,13 @@ for index, row in destinos.iterrows():
         unsafe_allow_html=True
     )
 
-    with st.expander(f'Destino {index+1} - Desde:{row['Desde']} hasta:{row['Hasta']} '):
+    with st.expander(f'Destino {row['DestinoId']} - Desde:{row['Desde']} hasta:{row['Hasta']} '):
 
         st.header('Datos generales')
 
         df_tmp = df[ df['DestinoId'] == row['DestinoId'] ]
 
-        general = df_tmp[columns_destino_short] 
+        general = df_tmp[columns_destino_short].drop_duplicates()
 
         general = general.T
 
