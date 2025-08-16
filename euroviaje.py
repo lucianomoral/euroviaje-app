@@ -30,7 +30,11 @@ for index, row in destinos.iterrows():
 
         df_tmp = df[ df['DestinoId'] == row['DestinoId'] ]
 
-        st.table(df_tmp[columns_destino_short])
+        general = df_tmp[columns_destino_short] 
+
+        general = general.T
+
+        st.table(general)
 
         for tipoEvento in df_tmp['TipoEvento'].drop_duplicates():
 
@@ -42,5 +46,7 @@ for index, row in destinos.iterrows():
 
             del(details['DestinoId'])
             del(details['TipoEvento'])
+
+            details = details.T
 
             st.table(details)
