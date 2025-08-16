@@ -1,0 +1,9 @@
+﻿DestinoId,DestinoNombre,DestinoBandera,Desde,Hasta,Cantidad de noches,Dias completos,Comentario,TipoEvento,Detalle,Código,Precio original,Precio USD,Estado,Fecha,Dirección,Link1,Link2,Comentarios
+1,Buenos Aires,https://flagcdn.com/w320/ar.png,25-Dec-2025,26-Dec-2025,1,0,,Vuelo,Vuelvo BsAs-Madrid,Vuelo: UX42 | Reserva: UX/KNJ23L,1225 USD c/u,1225 USD c/u,Pagado,25-Dec-2025,Aeropuerto Ezeiza,Boarding pass: https://drive.google.com/drive/folders/12qcTaDX66DUo6chnuzylPLp3Kcz5fYBr?usp=sharing,,Salida: 13.15hs - Llegada: 5.10hs
+2,Madrid (Ida),https://flagcdn.com/w320/es.png,26-Dec-2025,28-Dec-2025,2,1,,Alojamiento,,,,,,,,,,
+3,Londres,https://flagcdn.com/w320/gb.png,28-Dec-2025,2-Jan-2026,5,4,,Alojamiento,,,,,,,,,,
+4,Amsterdam,https://flagcdn.com/w320/nl.png,2-Jan-2026,6-Jan-2026,4,3,,Alojamiento,,,,,,,,,,
+5,Berlin,https://flagcdn.com/w320/de.png,6-Jan-2026,10-Jan-2026,4,3,,Alojamiento,,,,,,,,,,
+6,Praga,https://flagcdn.com/h120/cz.png,10-Jan-2026,13-Jan-2026,3,2,,Alojamiento,,,,,,,,,,
+7,Budapest,https://flagcdn.com/h120/hu.png,13-Jan-2026,16-Jan-2026,3,2,,Alojamiento,,,,,,,,,,
+8,Madrid (Vuelta),https://flagcdn.com/w320/es.png,16-Jan-2026,17-Jan-2026,1,0,Llegamos temprano y nos vamos al otro día 23.55. Sacamos una noche de más.,Alojamiento,,,,,,,,,,

@@ -1,25 +1,11 @@
-Fecha,Día,Actividad,País,Ciudad,Bandera
-25-12-25,Jueves,Viaje de ida,Argentina,Buenos Aires,https://flagcdn.com/w320/ar.png
-26-12-25,Viernes,Llegada a Madrid,España,Madrid,https://flagcdn.com/w320/es.png
-27-12-25,Sábado,Recorrido por Madrid / compras,España,Madrid,https://flagcdn.com/w320/es.png
-28-12-25,Domingo,Viaje a Londres,España,Madrid,https://flagcdn.com/w320/es.png
-29-12-25,Lunes,"Llegada a Londres, recorrido por la ciudad",Inglaterra,Londres,https://flagcdn.com/w320/gb.png
-30-12-25,Martes,Harry Potter,Inglaterra,Londres,https://flagcdn.com/w320/gb.png
-31-12-25,Miércoles,A confirmar,Inglaterra,Londres,https://flagcdn.com/w320/gb.png
-01-01-26,Jueves,A confirmar,Inglaterra,Londres,https://flagcdn.com/w320/gb.png
-02-01-26,Viernes,A confirmar,Inglaterra,Londres,https://flagcdn.com/w320/gb.png
-03-01-26,Sábado,A confirmar,Holanda,Amsterdam,https://flagcdn.com/h120/nl.png
-04-01-26,Domingo,A confirmar,Holanda,Amsterdam,https://flagcdn.com/h120/nl.png
-05-01-26,Lunes,A confirmar,Holanda,Amsterdam,https://flagcdn.com/h120/nl.png
-06-01-26,Martes,Viaje a Berlin,Holanda,Amsterdam,https://flagcdn.com/h120/nl.png
-07-01-26,Miércoles,A confirmar,Alemania,Berlin,https://flagcdn.com/w320/de.png
-08-01-26,Jueves,A confirmar,Alemania,Berlin,https://flagcdn.com/w320/de.png
-09-01-26,Viernes,A confirmar,Alemania,Berlin,https://flagcdn.com/w320/de.png
-10-01-26,Sábado,Viaje a Praga,Republica checa,Praga,https://flagcdn.com/h120/cz.png
-11-01-26,Domingo,A confirmar,Republica checa,Praga,https://flagcdn.com/h120/cz.png
-12-01-26,Lunes,A confirmar,Republica checa,Praga,https://flagcdn.com/h120/cz.png
-13-01-26,Martes,Viaje a budapest,Republica checa,Praga,https://flagcdn.com/h120/cz.png
-14-01-26,Miércoles,A confirmar,Hungria,Budapest,https://flagcdn.com/h120/hu.png
-15-01-26,Jueves,A confirmar,Hungria,Budapest,https://flagcdn.com/h120/hu.png
-16-01-26,Viernes,Viaje a Madrid,Hungria,Budapest,https://flagcdn.com/h120/hu.png
-17-01-26,Sábado,Vuelta a casa :(,España,Madrid,https://flagcdn.com/w320/es.png
+﻿Desde,Hasta,Actividades,País,Ciudad,Bandera,Alojamiento,Precio total,Moneda,Precio individual,Precio individual USD,Estado,Comentarios,Total,Individual,Está pago?,Falta por persona:,Falta pagar total:
+25-12-25,26-12-25,Viaje de ida,Argentina,Buenos Aires,https://flagcdn.com/w320/ar.png,N/A,0,ARS,0,0,N/A,N/A,N/A,N/A,N/A,$0.00 ,$0.00 
+26-12-25,28-12-25,Llegada a Madrid,España,Madrid,https://flagcdn.com/w320/es.png,Reservado,316,USD,79,79,Pago parcial,Resta pagar 63 USD c/u,316 USD (79 USD c/u),79 USD,63 USD,63 USD,253 USD
+29-12-25,02-01-26,"Recorrer ciudad
+Ver partido
+Buckingham Palace",Inglaterra,Londres,https://flagcdn.com/w320/gb.png,Reservado,630,Libras,157.5,204.75,Pago parcial,Resta pagar 102 USD c/u,630 Libras (157.5 Libras c/u),204.75 USD,315 L,79 L,315 L
+02-01-26,06-01-26,A confirmar,Holanda,Amsterdam,https://flagcdn.com/w320/nl.png,Reservado,,Eur,0,0.00,Falta pagar,Preguntarle a Ivo, Eur (0 Eur c/u),0 USD,N/A,$0.00 ,$0.00 
+06-01-26,10-01-26,A confirmar,Alemania,Berlin,https://flagcdn.com/w320/de.png,Reservado,470,Eur,117.5,138.24,Pago total,Pago total (viene en la tarjeta de Ivo en Septiembre),470 Eur (117.5 Eur c/u),138.24 USD,"Si, total",117 E,470 E
+10-01-26,13-01-26,Viaje a Praga,Republica checa,Praga,https://flagcdn.com/h120/cz.png,Reservado,260,Eur,65,76.47,Pago total,Pago total (viene en la tarjeta de Ivo en Septiembre),260 Eur (65 Eur c/u),76.47 USD,"Si, total",65 E,260 E
+13-01-26,16-01-26,A confirmar,Hungria,Budapest,https://flagcdn.com/h120/hu.png,Reservado,284,Eur,71,83.53,Falta pagar,Resta pagar 84 USD c/u,284 Eur (71 Eur c/u),83.53 USD,Se paga allá,71 E,284 E
+16-01-26,17-01-26,Vuelta a casa :(,España,Madrid,https://flagcdn.com/w320/es.png,Reservado,293,USD,73.25,73.25,Falta pagar,Resta pagar 73 USD c/u,293 USD (73.25 USD c/u),73.25 USD,No,73 USD,293 USD
