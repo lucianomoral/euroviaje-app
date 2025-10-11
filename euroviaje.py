@@ -54,22 +54,24 @@ def page_itinerario():
                 st.table(details)
 
 def page_presupuesto():
-    st.title("Presupuesto:")
 
     presupuesto_total = 3500
     cantidad_noches = 23
-    
-    
+
     df = pd.read_csv('gastos.csv', encoding='utf-8')
 
     presupuesto_consumido = df['Pagado'].sum()
     presupuesto_comprometido = df['Pendiente'].sum()
+    restante_por_noche = round((presupuesto_total - presupuesto_consumido - presupuesto_comprometido) / cantidad_noches, 2)
 
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Presupuesto total", f"{presupuesto_total} USD", border=True)
-    col2.metric("Pagado", f"{presupuesto_consumido} USD", border=True)
-    col3.metric("Comprometido a pagar", f"{presupuesto_comprometido} USD", border=True)
-    col4.metric("Restante por noche", f"{round((presupuesto_total - presupuesto_consumido) / cantidad_noches, 2)} USD", border=True)
+    st.title("Presupuesto:")
+    st.subheader(f"Presupuesto original: {presupuesto_total} USD")
+    st.subheader(f"Cantidad de noches: {cantidad_noches}")
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Pagado", value=f"{presupuesto_consumido} USD", delta="Gastos ya pagados", delta_color="off", border=True)
+    col2.metric(label="Comprometido a pagar", value=f"{presupuesto_comprometido} USD", delta="Gastos ya realizados, pero aún no pagados", delta_color="off", border=True)
+    col3.metric(label="Restante por noche", value=f"{restante_por_noche} USD", delta="Presupuesto total - Pagado - Comprometido a pagar / Cant. de noches", delta_color="off", border=True)
 
 
     st.dataframe(df)
