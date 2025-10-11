@@ -57,15 +57,22 @@ def page_presupuesto():
     st.title("Presupuesto:")
 
     presupuesto_total = 3500
-    presupuesto_comprometido = 1000
-    presupuesto_consumido = 2000
     cantidad_noches = 23
+    
+    
+    df = pd.read_csv('gastos.csv', encoding='utf-8')
+
+    presupuesto_consumido = df['Pagado'].sum()
+    presupuesto_comprometido = df['Pendiente'].sum()
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Presupuesto total", f"{presupuesto_total} USD", border=True)
     col2.metric("Pagado", f"{presupuesto_consumido} USD", border=True)
     col3.metric("Comprometido a pagar", f"{presupuesto_comprometido} USD", border=True)
-    col4.metric("Restante", f"{round((presupuesto_total - presupuesto_consumido) / cantidad_noches, 2)} USD", border=True)
+    col4.metric("Restante por noche", f"{round((presupuesto_total - presupuesto_consumido) / cantidad_noches, 2)} USD", border=True)
+
+
+    st.dataframe(df)
 
 pg = st.navigation([
     st.Page(page_itinerario, title="Itinerario", icon="📝"),
