@@ -1,52 +1,75 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_csv('euroviaje2.csv', dtype='object')
+def page_itinerario():
 
-columns_destino = ['DestinoId', 'DestinoNombre', 'DestinoBandera', 'Desde', 'Hasta', 'Cantidad de noches', 'Dias completos', 'Comentario']
-columns_destino_short = ['Desde', 'Hasta', 'Cantidad de noches', 'Dias completos', 'Comentario']
+    df = pd.read_csv('euroviaje2.csv', dtype='object')
 
-columns_eventos = ['DestinoId','TipoEvento','Detalle','Código','Precio original','Precio USD','Estado','Fecha','Dirección','Link1','Link2','Comentarios']
+    columns_destino = ['DestinoId', 'DestinoNombre', 'DestinoBandera', 'Desde', 'Hasta', 'Cantidad de noches', 'Dias completos', 'Comentario']
+    columns_destino_short = ['Desde', 'Hasta', 'Cantidad de noches', 'Dias completos', 'Comentario']
 
-destinos = df[columns_destino].drop_duplicates()
+    columns_eventos = ['DestinoId','TipoEvento','Detalle','Código','Precio original','Precio USD','Estado','Fecha','Dirección','Link1','Link2','Comentarios']
 
-st.title("Euroviaje!")
+    destinos = df[columns_destino].drop_duplicates()
 
-for index, row in destinos.iterrows():
+    st.title("Euroviaje!")
 
-    st.markdown(
-    f"""
-        <div style="display: flex; align-items: center;">
-            <img src="{row['DestinoBandera']}" height="25" style="margin-right: 8px;">
-            <span style="font-size: 18px; font-weight: 600;">{row['DestinoNombre']}</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    for index, row in destinos.iterrows():
 
-    with st.expander(f'Destino {row['DestinoId']} - Desde:{row['Desde']} hasta:{row['Hasta']} '):
+        st.markdown(
+        f"""
+            <div style="display: flex; align-items: center;">
+                <img src="{row['DestinoBandera']}" height="25" style="margin-right: 8px;">
+                <span style="font-size: 18px; font-weight: 600;">{row['DestinoNombre']}</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-        st.header('Datos generales')
+        with st.expander(f'Destino {row['DestinoId']} - Desde:{row['Desde']} hasta:{row['Hasta']} '):
 
-        df_tmp = df[ df['DestinoId'] == row['DestinoId'] ]
+            st.header('Datos generales')
 
-        general = df_tmp[columns_destino_short].drop_duplicates()
+            df_tmp = df[ df['DestinoId'] == row['DestinoId'] ]
 
-        general = general.T
+            general = df_tmp[columns_destino_short].drop_duplicates()
 
-        st.table(general)
+            general = general.T
 
-        for tipoEvento in df_tmp['TipoEvento'].drop_duplicates():
+            st.table(general)
 
-            st.header(tipoEvento)
+            for tipoEvento in df_tmp['TipoEvento'].drop_duplicates():
 
-            details = df_tmp[columns_eventos]
+                st.header(tipoEvento)
 
-            details = details[ details['TipoEvento'] == tipoEvento ]
+                details = df_tmp[columns_eventos]
 
-            del(details['DestinoId'])
-            del(details['TipoEvento'])
+                details = details[ details['TipoEvento'] == tipoEvento ]
 
-            details = details.T
+                del(details['DestinoId'])
+                del(details['TipoEvento'])
 
-            st.table(details)
+                details = details.T
+
+                st.table(details)
+
+def page_presupuesto():
+    st.title("Presupuesto:")
+
+    presupuesto_total = 3500
+    presupuesto_comprometido = 1000
+    presupuesto_consumido = 2000
+    cantidad_noches = 23
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Presupuesto total", f"{presupuesto_total} USD", border=True)
+    col2.metric("Pagado", f"{presupuesto_consumido} USD", border=True)
+    col3.metric("Comprometido a pagar", f"{presupuesto_comprometido} USD", border=True)
+    col4.metric("Restante", f"{round((presupuesto_total - presupuesto_consumido) / cantidad_noches, 2)} USD", border=True)
+
+pg = st.navigation([
+    st.Page(page_itinerario, title="Itinerario", icon="📝"),
+    st.Page(page_presupuesto, title="Presupuesto", icon="💰"),
+])
+
+pg.run()
