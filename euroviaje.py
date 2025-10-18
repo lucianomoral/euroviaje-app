@@ -51,30 +51,62 @@ def page_itinerario():
 
                 details = details.T
 
-                st.table(details)
+                st.table(details)  
 
 def page_presupuesto():
 
-    presupuesto_total = 3500
     cantidad_noches = 23
 
     df = pd.read_csv('gastos.csv', encoding='utf-8')
 
-    presupuesto_consumido = df['Pagado'].sum()
+    estados= list(df['Estado'].drop_duplicates())
+
+    estados.append('Todos')
+    estados.append('No pagado o pago parcial')
+
+    st.sidebar.header("Filtros")
+    status_filter = st.sidebar.radio(
+        "Estado:",
+        options=estados
+    )
+
+    st.title("Presupuesto")
+    #st.subheader(f"Presupuesto original: {presupuesto_total} USD")
+    presupuesto_total = st.slider(label='Para ajustar presupuesto, mover el slider:', value=3500, min_value=3500, max_value=5000)
+    st.subheader(f"Presupuesto original: {presupuesto_total} USD (Cantidad de noches: {cantidad_noches})")
+
+    presupuesto_consumido = df['Pagado'].sum()  
     presupuesto_comprometido = df['Pendiente'].sum()
     restante_por_noche = round((presupuesto_total - presupuesto_consumido - presupuesto_comprometido) / cantidad_noches, 2)
-
-    st.title("Presupuesto:")
-    st.subheader(f"Presupuesto original: {presupuesto_total} USD")
-    st.subheader(f"Cantidad de noches: {cantidad_noches}")
 
     col1, col2, col3 = st.columns(3)
     col1.metric(label="Pagado", value=f"{presupuesto_consumido} USD", delta="Gastos ya pagados", delta_color="off", border=True)
     col2.metric(label="Comprometido a pagar", value=f"{presupuesto_comprometido} USD", delta="Gastos ya realizados, pero aún no pagados", delta_color="off", border=True)
-    col3.metric(label="Restante por noche", value=f"{restante_por_noche} USD", delta="Presupuesto total - Pagado - Comprometido a pagar / Cant. de noches", delta_color="off", border=True)
+    col3.metric(label="Restante por noche", value=f"{restante_por_noche} USD", delta="(Total - Pagado - Por pagar) / Cant. de noches", delta_color="off", border=True)
 
 
-    st.dataframe(df)
+    if status_filter == 'No pagado o pago parcial':
+        df = df[df['Estado'].isin(['No pagado', 'Pago parcial'])]
+    elif status_filter != 'Todos':
+        df = df[df['Estado'] == status_filter]
+
+    df = df[['Fecha de pago pendiente', 'Pagado por', 'Descripcion', 'Pagado', 'Pendiente', 'Monto total', 'Categoria', 'Estado']]
+
+    df['Fecha de pago pendiente'] = pd.to_datetime(df['Fecha de pago pendiente'])
+
+    df['Periodo'] = df['Fecha de pago pendiente'].dt.to_period('M')
+
+    df = df.sort_values(by='Fecha de pago pendiente')
+
+    grouped = df.groupby('Periodo')
+
+    for period, group in grouped:
+        pagado = group['Pagado'].sum()  
+        pendiente = group['Pendiente'].sum()
+        with st.expander(f"{period.strftime('%B %Y')} || Pagado: {pagado} USD || Pendiente: {pendiente} USD"):
+            st.dataframe(group.drop(columns=['Periodo', 'Fecha de pago pendiente']))
+
+    #st.dataframe(df)
 
 pg = st.navigation([
     st.Page(page_itinerario, title="Itinerario", icon="📝"),

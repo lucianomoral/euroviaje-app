@@ -1,35 +1,24 @@
 import streamlit as st
 import pandas as pd
-import time
 
-st.title('Presupuesto')
+def calculate_total_sales(df):
+    return df['Sales'].sum()
 
-df = pd.read_csv('test.csv')
+st.title("Sales Dashboard")
 
-fecha = st.sidebar.selectbox('Fecha', df['Fecha'])
+# Initialize DataFrame in session state
+if 'sales_data' not in st.session_state:
+    st.session_state.sales_data = pd.DataFrame({
+        'Product': ['Laptop', 'Mouse', 'Keyboard'],
+        'Sales': [1200, 50, 75]
+    })
 
-left_column, right_column, last_column = st.columns(3)
+# Display and allow editing of the DataFrame
+edited_df = st.data_editor(st.session_state.sales_data, key="sales_editor")
 
-with left_column:
-    st.table(df[ df['Fecha'] == fecha ] )
+# Update session state with the edited DataFrame
+st.session_state.sales_data = edited_df
 
-with right_column:
-    x = st.slider('x')
-    st.write(x, 'squared is', x * x)
-
-
-'Starting a long computation...'
-
-# Add a placeholder
-latest_iteration = st.empty()
-bar = st.progress(0)
-
-for i in range(100):
-  # Update the progress bar with each iteration.
-  latest_iteration.text(f'Iteration {i+1}')
-  bar.progress(i + 1)
-  time.sleep(0.1)
-
-'...and now we\'re done!'
-
-st.html('<p>HOLAAAA</p>')
+# Calculate and display the updated metric
+total_sales = calculate_total_sales(st.session_state.sales_data)
+st.metric(label="Total Sales", value=f"${total_sales:,.2f}")
