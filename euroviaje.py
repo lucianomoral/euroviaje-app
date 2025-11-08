@@ -1,9 +1,20 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(layout = 'wide')
+
+itinerario_database_file = 'https://drive.google.com/uc?export=download&id=1xR8Ygg6BqKaolKi_u89TnEpa87Kiy39o'
+
+presupuesto_database_file = 'https://drive.google.com/uc?export=download&id=17o5-D_nBg2HbDgQ93mtroeahqMn9_Uhy'
+
+@st.cache_data
+def load_database_file(database_file):
+    df = pd.read_csv(database_file, dtype='object', encoding='utf-8')
+    return df
+
 def page_itinerario():
 
-    df = pd.read_csv('euroviaje2.csv', dtype='object')
+    df = load_database_file(itinerario_database_file)
 
     columns_destino = ['DestinoId', 'DestinoNombre', 'DestinoBandera', 'Desde', 'Hasta', 'Cantidad de noches', 'Dias completos', 'Comentario']
     columns_destino_short = ['Desde', 'Hasta', 'Cantidad de noches', 'Dias completos', 'Comentario']
@@ -57,7 +68,7 @@ def page_presupuesto():
 
     cantidad_noches = 23
 
-    df = pd.read_csv('gastos.csv', encoding='utf-8')
+    df = load_database_file(presupuesto_database_file)
 
     estados= list(df['Estado'].drop_duplicates())
 
@@ -75,8 +86,8 @@ def page_presupuesto():
     presupuesto_total = st.slider(label='Para ajustar presupuesto, mover el slider:', value=3500, min_value=3500, max_value=5000)
     st.subheader(f"Presupuesto original: {presupuesto_total} USD (Cantidad de noches: {cantidad_noches})")
 
-    presupuesto_consumido = df['Pagado'].sum()  
-    presupuesto_comprometido = df['Pendiente'].sum()
+    presupuesto_consumido = df['Pagado'].astype(int).sum()  
+    presupuesto_comprometido = df['Pendiente'].astype(int).sum()
     restante_por_noche = round((presupuesto_total - presupuesto_consumido - presupuesto_comprometido) / cantidad_noches, 2)
 
     col1, col2, col3 = st.columns(3)
@@ -101,8 +112,8 @@ def page_presupuesto():
     grouped = df.groupby('Periodo')
 
     for period, group in grouped:
-        pagado = group['Pagado'].sum()  
-        pendiente = group['Pendiente'].sum()
+        pagado = group['Pagado'].astype(int).sum()  
+        pendiente = group['Pendiente'].astype(int).sum()
         with st.expander(f"{period.strftime('%B %Y')} || Pagado: {pagado} USD || Pendiente: {pendiente} USD"):
             st.dataframe(group.drop(columns=['Periodo', 'Fecha de pago pendiente']))
 
