@@ -7,7 +7,7 @@ itinerario_database_file = 'https://drive.google.com/uc?export=download&id=1xR8Y
 
 presupuesto_database_file = 'https://drive.google.com/uc?export=download&id=17o5-D_nBg2HbDgQ93mtroeahqMn9_Uhy'
 
-@st.cache_data
+@st.cache_data(ttl=600)
 def load_database_file(database_file):
     df = pd.read_csv(database_file, dtype='object', encoding='utf-8')
     return df
